@@ -1,0 +1,58 @@
+{
+  //编译选项的相关配置选项
+  "compilerOptions": {
+    //目标代码(ts->js(es5/6/7))
+    //esnext:都支持e6及以上的代码
+    //无论这里怎么转换,babel都会自动帮我们转换
+    //会依据browserslistrc来帮我们进行对应的转换
+    "target": "esnext",
+    //目标代码需要使用的模块化方案(commonjs require/module.exports/es module inport/export)
+    "module": "esnext",
+    //严格一些严格的检查(如可不可以使用any)
+    "strict": true,
+    //要不要对jsx进行怎么样的处理
+    //preserve :保留,不进行转换
+    //babel本身就可以帮助我们转换jsx
+    "jsx": "preserve",
+    //按照node的方式去解析模块 import "/index"
+    "moduleResolution": "node",
+    //跳过一些库的类型检测(比如axios->定义很多类型
+    //lodash->@type/lodash /其他的类型)
+    //会浪费很多性能;防止类型冲突
+    //导入哪个库,就用对应的类型
+    "skipLibCheck": true,
+    //export default/ module.exports={}
+    //也就是es module 和commonjs 能不能混用
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    //禁止对同一个文件的不一致的引用
+    "forceConsistentCasingInFileNames": true,
+    //字段声明的方式从 = 赋值的方式变更成了 Object.defineProperty
+    //所有的字段声明都会生效，即使它没有指定默认值
+    "useDefineForClassFields": true,
+    //要不要映射文件
+    "sourceMap": true,
+    //文件路径解析时,基本的url
+    "baseUrl": ".",
+    //指定具体要解析使用的类型
+    //如果不传,取决于target类型
+    //webpack-env:默认的
+    "types": ["webpack-env"],
+    //路径解析:编译阶段,类似于 webpack alias
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    //可以指定在项目中可以使用哪些库的类型Proxy/Window/Document
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  },
+  //当前哪些代码会被解析
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  //排除掉其他类型 ，只解析引用的类型
+  "exclude": ["node_modules"]
+}
